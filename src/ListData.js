@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function ListData() {
   const [todoList, setTodoList] = useState([]);
   const [start, setStart] = useState(0);
+  const [limit, setLimit] = useState(10);
 
   const fetchData = useCallback(() => {
     axios({
@@ -12,13 +13,16 @@ function ListData() {
       url: 'https://jsonplaceholder.typicode.com/todos?',
       params: {
         _start: start,
-        _limit: 10,
+        _limit: limit,
       },
     })
       .then((response) => {
         console.log(response);
         setTodoList(response.data);
-        // setStart(`${_start} + ${_limit}`);
+        // const newStart = start + limit;
+        // console.log(newStart);
+        // setStart(newStart + limit);
+        // console.log(start);
       })
       .catch((error) => {
         console.log(error);
